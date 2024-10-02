@@ -8,6 +8,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fredoka:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
 
 body {
   font-family: "Fredoka", sans-serif;
@@ -20,8 +21,10 @@ section {
   display: none;
 }
 
-section.visible {
+#file-section.visible,
+#text-section.visible {
   display: block;
+  animation: fadeIn .5s forwards ease;
 }
 
 section .title div {
@@ -33,13 +36,14 @@ section .title div {
 
 section .title h1 {
   letter-spacing: 3px;
+  font-size: 2.5rem;
 }
 
 section .title i {
   margin-left: .7rem;
 }
 
-section h3 {
+section .welcomeMessage {
   font-family: "Caveat", cursive;
   font-size: 1.3rem;
   font-weight: lighter;
@@ -48,13 +52,12 @@ section h3 {
   margin-top: 1rem;  
 }
 
-/* ====================== FILE SECTION ====================== */
 #file-section,
 #text-section {
   background-color: white;
   border: 2px solid black;
   border-radius: 10px;
-  position: absolute;
+  position: absolute; 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -62,28 +65,60 @@ section h3 {
   padding: 2rem;
 }
 
+/* ====================== FILE SECTION ====================== */
+#file-section hr {
+  margin: 1rem 0;
+}
+
 #file-section form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 350px;
-  min-height: 450px;
+  min-width: 20rem;
+  min-height: 35rem;
 }
 
 #file-section h4 {
-  margin-bottom: .5rem;
+  margin-bottom: .6rem;
 }
 
-#tips,
+#wrapper {
+  border: 1px solid rgba(94, 94, 232, 0.623);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: start;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 13rem;
+  justify-content: space-between;
+}
+
+#wrapper label {
+  display: block;
+  margin-bottom: .1rem;
+}
+
+#wrapper input {
+  padding: .3rem;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+}
+
+.tips,
 #file-area,
 .submit-area {
   font-size: 1rem;
 }
 
 .submit-area {
-  margin-top: 1rem;
   display: flex;
   gap: 4rem;
+  margin-top: 2rem;
+}
+
+.submit-area button i {
+  margin-left: .5rem;
 }
 
 .mainBtn {
@@ -96,14 +131,23 @@ section h3 {
 }
 
 #sendFileBtn {
-  background: #5e5ee8;
+  background-color: #5e5ee8;
 }
 
-#cancelBtn {
+#sendFileBtn.sending {
+  background-color: green;
+  content: "Teste";
+}
+
+#goBackBtn {
   background-color: rgb(255, 55, 55);
 }
 
-#reviseBtn {
+#downloadBtn {
+  background-color: #5e5ee8;
+}
+
+#formatBtn {
   background-color: rgb(229, 149, 0);
 }
 
@@ -120,7 +164,7 @@ section h3 {
 #noSelectedFile.visible {
   display: block;
   position: absolute;
-  bottom: 5.5rem;
+  bottom: 5.6rem;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -140,5 +184,93 @@ section h3 {
   height: 100%;
   overflow-y: scroll;
   padding: 1rem;
+  margin-top: 1rem;
   font-size: 1.2rem;
+}
+
+#errorMessage {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .8rem;
+  color: red;
+  display: none;
+}
+
+#errorMessage.visible {
+  display: block;
+}
+
+/* ====================== FLOATING SECTION ====================== */
+#floatingSection {
+  width: 40%;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.9;
+  color: white;
+  padding: 2rem;
+  text-align: end;
+  overflow: auto;
+  font-size: .9rem;
+  letter-spacing: 2px;
+  position: absolute;
+}
+
+#floatingSection #text-theme {
+  font-weight: lighter;
+}
+
+#floatingSection #correction {
+  font-size: 1rem;
+  text-align: start;
+  font-weight: lighter;
+}
+
+#floatingSection.visible {
+  display: block;
+  animation: correction forwards 1s ease;
+}
+
+#floatingSection #student {
+  text-align: center;
+  margin: 0 auto;
+  width: 70%;
+  margin-bottom: 4rem;
+}
+
+#theme,
+#note {
+  font-weight: lighter;
+}
+
+#floatingSection hr {
+  margin: 3rem 0;
+}
+
+#closeBtn {
+  background: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+/* ====================== ANIMATION ====================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes correction {
+  from {
+    right: -100%;
+  }
+  to {
+    right: 0;
+  }
 }

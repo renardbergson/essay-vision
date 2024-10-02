@@ -14,32 +14,56 @@
           <h1>Essay Vision</h1>
           <i class="fa-solid fa-book"></i>
         </div>
-        <h3>Bem-vindo ao reconhecimento <br> de texto manuscrito!</h3>
+        <h3 class="welcomeMessage">Bem-vindo ao reconhecimento <br> de redação manuscrita!</h3>
       </div>
 
       <hr>
   
-      <div id="tips">
+      <div class="tips">
         <h4>Como otimizar seus resultados:</h4>
         <ul>
-          <li>Utilize imagens com boa nitidez</li>
-          <li>Capriche na iluminação ao fotografar</li>
+          <li>- Capriche na iluminação ao fotografar</li>
+          <li>- Verifique se a imagem está com boa nitidez</li>
+          <li>- Limite-se à enviar apenas a área textual</li>
+        </ul>
+      </div>
+
+      <hr>
+      
+      <div class="tips"></div>
+      <h4>Sobre o uso:</h4>
+        <ul>
+          <li>- O envio de múltiplos arquivos não é suportado</li>
+          <li>- A correção ortográfica pode não corresponder</li>
+          <li>- Sempre compare o arquivo e o texto obtido</li> 
         </ul>
       </div>
 
       <hr>
 
-      <div id="file-area">
-        <h4>Selecione o arquivo que deseja enviar</h4>
-        <input name="file" type="file" id="file-input">
+      <h4>Dados para envio:</h4>
+      <div id="wrapper">
+        <div>
+          <label for="name">Aluno</label>
+          <input name="name" type="text" id="name" placeholder="ex.: Renard Bergson">
+        </div>
+  
+        <div>
+          <label for="theme">Tema</label>
+          <input name="name" type="text" id="theme" placeholder="ex.: A desigualdade social no Brasil">
+        </div>
+  
+        <div id="file-area">
+          <input name="file" type="file" id="file-input">
+        </div>
       </div>
 
       <hr>
 
-      <div class="submit-area"> 
+      <div> 
         <button type="submit" class="mainBtn" id="sendFileBtn">Analisar</button>
       </div>
-      <span id="noSelectedFile">Nenhum arquivo foi selecionado!</span>
+      <span id="noSelectedFile">Há campos não preenchidos!</span>
     </form>
   </section>
 
@@ -50,17 +74,48 @@
           <h1>Essay Vision</h1>
           <i class="fa-solid fa-book"></i>
         </div>
-        <h3>Bem-vindo ao reconhecimento <br> de texto manuscrito!</h3>
+        <h3 class="welcomeMessage">Bem-vindo ao reconhecimento <br> de texto manuscrito!</h3>
       </div>
   
       <textarea name="text" id="text-area"></textarea>
 
+      <span id="errorMessage"></span>
+
       <div class="submit-area"> 
-        <button class="mainBtn" id="cancelBtn">Cancelar</button>
-        <button class="mainBtn" id="reviseBtn">Sugerir Ortografia</button>
-        <button type="submit" class="mainBtn" id="allowBtn">Sugerir Melhorias</button>
+        <button class="mainBtn" id="goBackBtn">
+          Voltar 
+          <i class="fa-solid fa-angles-left"></i>
+        </button>
+        <button class="mainBtn" id="downloadBtn">
+          Salvar Texto 
+          <i class="fa-solid fa-download"></i>
+        </button>
+        <button class="mainBtn" id="formatBtn">
+          Sugerir Ortografia e Formatação
+          <i class="fa-solid fa-file-lines"></i>
+        </button>
+        <button type="submit" class="mainBtn" id="allowBtn">
+          Obter correção
+          <i class="fa-solid fa-robot"></i>
+        </button>
       </div>
     </form>
+  </section>
+
+  <section id="floatingSection">
+    <button id="closeBtn">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div id="student">
+      <h1>Aluno: <span id="student-name"><!-- a preencher --></span></h1>
+      <br>
+      <h3>Tema: <span id="text-theme"><!-- a preencher --></span></h3>
+    </div>
+
+    <hr>
+
+    <div id="correction"></div>
   </section>
 
   <script src="./js/index.js"></script>
