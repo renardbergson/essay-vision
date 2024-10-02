@@ -42,13 +42,18 @@ document.getElementById("uploadForm").addEventListener("submit", (e) => {
     mainBtn.innerText = "Analisar";
     handleSections(1, true);
   })
-  .catch(error => console.error("Erro:", error));
+  .catch(error => {
+    mainBtn.classList.remove("sending");
+    mainBtn.innerText = "Analisar";
+    console.error("Erro:", error)
+  });
 })
 
-// home
+// go back
 document.getElementById("goBackBtn").addEventListener("click", (e) => {
   e.preventDefault();
   sessionStorage.clear();
+  document.querySelector("#uploadForm").reset();
   handleSections(0, true);
 })
 
@@ -138,6 +143,7 @@ document.getElementById("text-form").addEventListener("submit", async (e) => {
   handleSections(2, false);
 })
 
+// close correction
 document.getElementById("closeBtn").addEventListener("click", (e) => {
   handleSections(1, true);
 })
