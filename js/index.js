@@ -1,4 +1,4 @@
-const serverURI = "http://localhost:8080";
+const serverURI = "https://essay-vision-server.onrender.com";
 const textArea = document.querySelector("#text-area");
 
 // file upload
