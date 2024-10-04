@@ -34,11 +34,11 @@ Acesse o link para testar o aplicativo: [Live Link](https://essay-vision.netlify
 Se você tiver perguntas, sugestões ou precisar de ajuda, entre em contato conosco:
 
 - **Renard**  
-  Email: [renard.contato@gmail.com](mailto:renard@email.com)  
+  Email: [renard.contato@gmail.com](mailto:renard.contato@gmail.com)  
   LinkedIn: [Renard Bergson](https://www.linkedin.com/in/renardbergson)
 
 - **Esdras**  
-  Email: [esdras.medeiros43@gmail.com](mailto:esdras@email.com)  
+  Email: [esdras.medeiros43@gmail.com](mailto:esdras.medeiros43@gmail.com)  
 
 ## 📄 Licença
 
