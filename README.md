@@ -1,5 +1,5 @@
 # Essay Vision
-Bem-vindo ao reconhecimento de texto manuscrito!
+Bem-vindo ao corretor de redação manuscrita!
 
 ## 📚 O que é o Essay Vision?
 
