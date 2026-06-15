@@ -139,6 +139,7 @@ document.getElementById("text-form").addEventListener("submit", async (e) => {
 
   textArea.value = currentText;
   correctionArea.innerHTML = correction;
+  enhanceCorrectionLayout(correctionArea);
   
   handleSections(2, false);
 })
@@ -174,4 +175,92 @@ function handleError(condition, message) {
   
   errorMessage.classList.remove("visible");
   return false;
+}
+
+function enhanceCorrectionLayout(container) {
+  const headings = [...container.querySelectorAll("h2")];
+
+  headings.forEach((heading) => {
+    const text = heading.textContent.trim();
+
+    if (/competência\s*\d/i.test(text)) {
+      formatCompetencyHeading(heading);
+      wrapCorrectionSection(heading, "competency-block");
+      return;
+    }
+
+    if (/sugest/i.test(text)) {
+      heading.classList.add("suggestions-heading");
+      wrapCorrectionSection(heading, "suggestions-block");
+    }
+  });
+
+  container.querySelectorAll("div, p").forEach((element) => {
+    if (/^nota sugerida/i.test(element.textContent.trim())) {
+      element.classList.add("grade-block");
+      element.removeAttribute("style");
+    }
+  });
+}
+
+function formatCompetencyHeading(heading) {
+  const match = heading.textContent.trim().match(/Competência\s*(\d)\s*:?\s*(.*)/i);
+  if (!match) return;
+
+  heading.classList.add("competency-heading");
+  heading.innerHTML = `
+    <span class="competency-num">${match[1]}</span>
+    <span class="competency-title-text">${match[2].trim()}</span>
+  `;
+}
+
+/* 
+  Ao clicar em “Obter correção”, o backend devolve HTML gerado pela IA — algo assim:
+
+  <h2>Competência 1: ...</h2>
+  <p>...</p>
+  <hr>
+  <h2>Competência 2: ...</h2>
+  ...
+
+  Esse HTML não tem classes (competency-block, etc.). Ele muda a cada resposta.
+
+  Para estilizar e criar cards por competência, fonte diferente no título vs. no comentário, nota separada — o CSS precisaria de classes ou estrutura fixa. 
+  
+  Como isso não existe no HTML que chega, o JS roda enhanceCorrectionLayout() depois de inserir a correção e:
+
+  - envolve cada competência em um <article class="competency-block">
+  - formata o título (número + nome)
+  - isola “Sugestões de melhorias” e “Nota sugerida”
+  - Sem isso, o CSS só conseguiria estilizar todos os h2 e p iguais — sem separar competência de consideração.
+*/
+function wrapCorrectionSection(heading, blockClass) {
+  const block = document.createElement("article");
+  block.className = blockClass;
+  heading.parentNode.insertBefore(block, heading);
+  block.appendChild(heading);
+
+  let sibling = block.nextSibling;
+
+  while (sibling) {
+    if (sibling.tagName === "H2") break;
+
+    if (
+      sibling.tagName === "DIV" &&
+      /^nota sugerida/i.test(sibling.textContent.trim())
+    ) {
+      break;
+    }
+
+    if (sibling.tagName === "HR") {
+      const divider = sibling;
+      sibling = sibling.nextSibling;
+      divider.remove();
+      continue;
+    }
+
+    const node = sibling;
+    sibling = sibling.nextSibling;
+    block.appendChild(node);
+  }
 }
